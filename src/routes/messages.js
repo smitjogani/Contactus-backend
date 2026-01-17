@@ -5,9 +5,7 @@ const authMiddleware = require('../middleware/auth');
 const { messageValidation } = require('../utils/validators');
 const { handleValidationErrors } = require('../utils/responseHelper');
 
-// @route   POST /api/messages
-// @desc    Submit a contact message
-// @access  Public
+//POST /api/messages
 router.post(
     '/',
     messageValidation,
@@ -15,34 +13,22 @@ router.post(
     messageController.createMessage
 );
 
-// @route   GET /api/messages
-// @desc    Get all messages (with filters)
-// @access  Private (Admin only)
+//GET /api/messages
 router.get('/', authMiddleware, messageController.getAllMessages);
 
-// @route   GET /api/messages/:id
-// @desc    Get single message
-// @access  Private (Admin only)
+//GET /api/messages/:id
 router.get('/:id', authMiddleware, messageController.getMessageById);
 
-// @route   PATCH /api/messages/:id/read
-// @desc    Mark message as read/unread
-// @access  Private (Admin only)
+//PATCH /api/messages/:id/read
 router.patch('/:id/read', authMiddleware, messageController.updateReadStatus);
 
-// @route   PATCH /api/messages/:id/spam
-// @desc    Mark message as spam
-// @access  Private (Admin only)
+//PATCH /api/messages/:id/spam
 router.patch('/:id/spam', authMiddleware, messageController.markAsSpam);
 
-// @route   DELETE /api/messages/:id
-// @desc    Delete message
-// @access  Private (Admin only)
+//DELETE /api/messages/:id
 router.delete('/:id', authMiddleware, messageController.deleteMessage);
 
-// @route   POST /api/messages/bulk/delete
-// @desc    Bulk delete messages
-// @access  Private (Admin only)
+//POST /api/messages/bulk/delete
 router.post('/bulk/delete', authMiddleware, messageController.bulkDeleteMessages);
 
 module.exports = router;

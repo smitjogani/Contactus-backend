@@ -2,8 +2,6 @@ const messageService = require('../services/messageService');
 
 class MessageController {
     // Submit a contact message
-    // @route POST /api/messages
-    // @access Public
     async createMessage(req, res) {
         try {
             const message = await messageService.createMessage(req.body);
@@ -23,8 +21,6 @@ class MessageController {
     }
 
     // Get all messages with filters
-    // @route GET /api/messages
-    // @access Private (Admin only)
     async getAllMessages(req, res) {
         try {
             const result = await messageService.getAllMessages(req.query);
@@ -45,8 +41,6 @@ class MessageController {
     }
 
     // Get single message
-    // @route GET /api/messages/:id
-    // @access Private (Admin only)
     async getMessageById(req, res) {
         try {
             const message = await messageService.getMessageById(req.params.id);
@@ -73,8 +67,6 @@ class MessageController {
     }
 
     // Mark message as read/unread
-    // @route PATCH /api/messages/:id/read
-    // @access Private (Admin only)
     async updateReadStatus(req, res) {
         try {
             const { isRead } = req.body;
@@ -106,8 +98,6 @@ class MessageController {
     }
 
     // Mark message as spam
-    // @route PATCH /api/messages/:id/spam
-    // @access Private (Admin only)
     async markAsSpam(req, res) {
         try {
             const message = await messageService.markAsSpam(req.params.id);
@@ -135,8 +125,6 @@ class MessageController {
     }
 
     // Delete message
-    // @route DELETE /api/messages/:id
-    // @access Private (Admin only)
     async deleteMessage(req, res) {
         try {
             await messageService.deleteMessage(req.params.id);
@@ -163,8 +151,6 @@ class MessageController {
     }
 
     // Bulk delete messages
-    // @route POST /api/messages/bulk/delete
-    // @access Private (Admin only)
     async bulkDeleteMessages(req, res) {
         try {
             const deletedCount = await messageService.bulkDeleteMessages(req.body.ids);

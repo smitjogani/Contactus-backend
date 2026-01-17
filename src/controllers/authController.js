@@ -2,8 +2,6 @@ const authService = require('../services/authService');
 
 class AuthController {
     // Register a new admin
-    // @route POST /api/auth/register
-    // @access Public (should be protected in production)
     async register(req, res) {
         try {
             const result = await authService.registerAdmin(req.body);
@@ -31,8 +29,6 @@ class AuthController {
     }
 
     // Login admin
-    // @route POST /api/auth/login
-    // @access Public
     async login(req, res) {
         try {
             const result = await authService.loginAdmin(req.body);
