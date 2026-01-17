@@ -2,8 +2,6 @@ const Message = require('../models/Message');
 
 class MessageService {
     // Create a new contact message
-    // @param {Object} messageData - Message data
-    // @returns {Promise<Object>} Created message
     async createMessage(messageData) {
         const { name, email, subject, message, phone } = messageData;
 
@@ -27,8 +25,6 @@ class MessageService {
     }
 
     // Get all messages with filters and pagination
-    // @param {Object} filters - Filter options
-    // @returns {Promise<Object>} Messages with pagination and stats
     async getAllMessages(filters) {
         const { status, search, page = 1, limit = 10 } = filters;
 
@@ -87,8 +83,6 @@ class MessageService {
     }
 
     // Get message by ID
-    // @param {string} messageId - Message ID
-    // @returns {Promise<Object>} Message
     async getMessageById(messageId) {
         const message = await Message.findById(messageId);
         if (!message) {
@@ -98,9 +92,6 @@ class MessageService {
     }
 
     // Update message read status
-    // @param {string} messageId - Message ID
-    // @param {boolean} isRead - Read status
-    // @returns {Promise<Object>} Updated message
     async updateReadStatus(messageId, isRead = true) {
         const message = await Message.findByIdAndUpdate(
             messageId,
@@ -116,8 +107,6 @@ class MessageService {
     }
 
     // Mark message as spam
-    // @param {string} messageId - Message ID
-    // @returns {Promise<Object>} Updated message
     async markAsSpam(messageId) {
         const message = await Message.findByIdAndUpdate(
             messageId,
@@ -133,8 +122,6 @@ class MessageService {
     }
 
     // Delete message
-    // @param {string} messageId - Message ID
-    // @returns {Promise<Object>} Deleted message
     async deleteMessage(messageId) {
         const message = await Message.findByIdAndDelete(messageId);
         if (!message) {
@@ -144,8 +131,6 @@ class MessageService {
     }
 
     // Bulk delete messages
-    // @param {Array<string>} messageIds - Array of message IDs
-    // @returns {Promise<number>} Number of deleted messages
     async bulkDeleteMessages(messageIds) {
         if (!messageIds || !Array.isArray(messageIds) || messageIds.length === 0) {
             throw new Error('Please provide message IDs to delete');
@@ -156,7 +141,6 @@ class MessageService {
     }
 
     // Get message statistics
-    // @returns {Promise<Object>} Message stats
     async getMessageStats() {
         return {
             total: await Message.countDocuments({ isSpam: false }),

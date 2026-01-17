@@ -4,8 +4,6 @@ const Admin = require('../models/Admin');
 
 class AuthService {
     // Register a new admin
-    // @param {Object} adminData - Admin registration data
-    // @returns {Promise<Object>} Created admin and token
     async registerAdmin(adminData) {
         const { name, email, password } = adminData;
 
@@ -43,8 +41,6 @@ class AuthService {
     }
 
     // Login admin
-    // @param {Object} credentials - Login credentials
-    // @returns {Promise<Object>} Admin and token
     async loginAdmin(credentials) {
         const { email, password } = credentials;
 
@@ -75,8 +71,6 @@ class AuthService {
     }
 
     // Get admin by ID
-    // @param {string} adminId - Admin ID
-    // @returns {Promise<Object>} Admin data
     async getAdminById(adminId) {
         const admin = await Admin.findById(adminId).select('-password');
         if (!admin) {
@@ -86,8 +80,6 @@ class AuthService {
     }
 
     // Generate JWT token
-    // @param {Object} admin - Admin object
-    // @returns {string} JWT token
     generateToken(admin) {
         return jwt.sign(
             { id: admin._id, role: admin.role },
