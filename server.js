@@ -51,10 +51,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./src/routes/auth'));
 // Apply strict rate limiting to contact form submissions
 app.post('/api/messages', contactFormLimiter);
-app.use('/api/messages', require('./routes/messages'));
+app.use('/api/messages', require('./src/routes/messages'));
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -86,6 +86,6 @@ app.use((err, req, res, next) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
 });
